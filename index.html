@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CropInsight AI</title>
+   
+   
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #4CAF50, #81C784);
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+
+    .container {
+        background: white;
+        width: 400px;
+        margin: 60px auto;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0px 10px 20px rgba(15, 206, 5, 0.2);
+    }
+
+    h1 {
+        color: #0a240b;
+    }
+
+    input {
+        margin: 15px 0;
+    }
+
+    button {
+        padding: 10px 20px;
+        background: #2e7d32;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #1b5e20;
+    }
+
+    img {
+        margin-top: 15px;
+        max-width: 100%;
+        border-radius: 10px;
+    }
+
+    #result {
+        margin-top: 15px;
+        font-weight: bold;
+    }
+
+    #treatment {
+        margin-top: 10px;
+        text-align: left;
+    }
+</style>
+
+
+</head>
+
+<body>
+
+<div class="container">
+    <h1>🌿 CropInsight AI</h1>
+    <p>Upload crop leaf image</p>
+
+
+<input type="file" id="fileInput" accept="image/*">
+<br>
+<button onclick="predict()">Predict</button>
+
+<div id="preview"></div>
+<div id="result"></div>
+<div id="treatment"></div>
+
+
+</div>
+
+<script>
+async function predict() {
+    const fileInput = document.getElementById("fileInput");
+    const resultDiv = document.getElementById("result");
+    const treatmentDiv = document.getElementById("treatment");
+    const previewDiv = document.getElementById("preview");
+
+    if (fileInput.files.length === 0) {
+        alert("Please select an image!");
+        return;
+    }
+
+    const file = fileInput.files[0];
+
+    // Show preview
+    const img = document.createElement("img");
+    img.src = URL.createObjectURL(file);
+    previewDiv.innerHTML = "";
+    previewDiv.appendChild(img);
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    resultDiv.innerText = "⏳ Processing...";
+    treatmentDiv.innerHTML = "";
+
+    try {
+        const response = await fetch("/predict", {
+            method: "POST",
+            body: formData
+        });
+
+        const data = await response.json();
+
+        resultDiv.innerHTML =
+            "🌱 Disease: " + data.full_name +
+            "<br>📊 Confidence: " + data.confidence_percentage;
+
+        // Show treatment
+        if (data.treatment) {
+            let html = "<h3>🩺 Treatment:</h3><ul>";
+            data.treatment.forEach(item => {
+                html += "<li>" + item + "</li>";
+            });
+            html += "</ul>";
+            treatmentDiv.innerHTML = html;
+        }
+
+    } catch (error) {
+        resultDiv.innerText = "❌ Error connecting to server";
+    }
+}
+</script>
+
+</body>
+</html>
