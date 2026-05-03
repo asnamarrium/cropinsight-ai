@@ -16,7 +16,17 @@
 CropInsight AI is an intelligent crop disease detection system that uses Deep Learning and Computer Vision to analyze plant leaf images and identify diseases. It helps enable smart agriculture through fast, automated and reliable crop health diagnostics.
 > A real-world AI application designed to assist farmers in early disease detection and improve agricultural productivity.
 ---
+---
 
+## 🌐 Live Demo
+
+🚀 Try the live application here:
+
+🔗 **[Launch CropInsight AI](https://cropinsight-ai--asnamaryum.replit.app)**
+
+📌 Deployed on Replit | Real-time AI-powered crop diagnostics
+
+---
 ## 🧠 Key Features
 - Image-based crop disease detection  
 - Deep Learning model (MobileNetV2)  
@@ -96,7 +106,6 @@ dataset/plantvillage dataset/color
 ## 📈 Future Improvements
 - Improve model accuracy  
 - Add real-time camera detection  
-- Deploy to cloud  
 - Enhance UI/UX  
 
 ---
