@@ -8,7 +8,7 @@ import io
 import os
 from pathlib import Path
 
-app = FastAPI(title="AgriVision Pro - Plant Disease Detection")
+app = FastAPI(title="🌿 CropInsight AI — AI-Powered Crop Diagnostics")
 
 # PlantVillage Dataset - 38 Classes with Treatments
 PLANT_DISEASES = {
@@ -519,7 +519,9 @@ PLANT_DISEASES = {
 }
 
 # Load the TFLite model
-MODEL_PATH = "models/agrivision_edge_model.tflite"
+import os
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATH = os.path.join(BASE_DIR, "models", "crop_dignostic_edge_model.tflite")
 
 try:
     interpreter = tf.lite.Interpreter(model_path=MODEL_PATH)
@@ -617,7 +619,7 @@ async def health_check():
 if __name__ == "__main__":
     import uvicorn
     print("\n" + "="*60)
-    print("🌿 AgriVision Pro - Starting...")
+    print("🌿 CropInsight AI - Starting...")
     print("="*60)
     print("📱 Web Interface: http://localhost:8000")
     print("📚 API Docs: http://localhost:8000/docs")
@@ -627,3 +629,8 @@ if __name__ == "__main__":
     # host="0.0.0.0" listens on all interfaces but use localhost to access
     # For network access from other machines, change host to your machine IP
     uvicorn.run(app, host="127.0.0.1", port=8000)
+
+import uvicorn
+
+if __name__ == "__main__":
+    uvicorn.run("main:app", host="0.0.0.0", port=8000)
