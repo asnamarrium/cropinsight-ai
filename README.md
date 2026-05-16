@@ -22,7 +22,7 @@ CropInsight AI is an intelligent crop disease detection system that uses Deep Le
 
 🚀 Try the live application here:
 
-🔗 **[Launch CropInsight AI](https://cropinsight-ai--asnamarrium0.replit.app/)**
+🔗 **[Launch CropInsight AI](https://asnamarrium-cropinsight-ai.hf.space)**
 
 📌 Deployed on Replit | Real-time AI-powered crop diagnostics
 
